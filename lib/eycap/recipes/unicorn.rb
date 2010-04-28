@@ -54,20 +54,4 @@ Capistrano::Configuration.instance(:must_exist).load do
     
   end #namespace
   
-  namespace :deploy do
-    desc "Restart the Unicorn processes on the app slices."
-    task :restart, :roles => :app do
-      unicorn.deploy
-    end
-
-    desc "Start the Unicorn processes on the app slices."
-    task :start, :roles => :app do
-      unicorn.start
-    end    
-    
-    desc "Stop the Unicorn processes on the app slices."
-    task :stop, :roles => :app do
-      unicorn.stop
-    end
-  end
 end #Capistrano::Configuration

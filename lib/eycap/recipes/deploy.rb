@@ -72,22 +72,18 @@ Capistrano::Configuration.instance(:must_exist).load do
 
     desc "Restart the Mongrel processes on the app slices."
     task :restart, :roles => :app do
-      mongrel.restart
     end
 
     desc "Start the Mongrel processes on the app slices."
     task :spinner, :roles => :app do
-      mongrel.start
     end
 
     desc "Start the Mongrel processes on the app slices."
     task :start, :roles => :app do
-      mongrel.start
     end    
     
     desc "Stop the Mongrel processes on the app slices."
     task :stop, :roles => :app do
-      mongrel.stop
     end
     
     namespace :web do

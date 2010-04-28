@@ -28,6 +28,10 @@ and cloned from:
    
   git://github.com/engineyard/eycap.git
 
+== GIT Submodule
+
+git submodule init git://github.com/engineyard/eycap.git vendor/plugins/eycap
+
 == USAGE:
 
 === Include in capistrano
@@ -35,6 +39,27 @@ and cloned from:
 In your deploy.rb, simply include this line at the top:
 
 require 'eycap/recipes'
+require 'vendor/plugins/eycap/lib/eycap/recipes'
+
+== Deploy Setup
+
+Setup stop, restart, start, and spinner methods for the deployment options you use.  This example supports mongrel and unicorn:
+
+namespace :deploy do
+  [:start, :stop, :restart, :spinner ].each do |t|
+    desc "#{t} the processes on the app slices."
+    task t, :roles => :app do
+      servers = find_servers( :roles => [:app], :except => {:unicorn => false} )
+      if servers.any?
+        unicorn.send( t )
+      end
+      servers = find_servers( :roles => [:app], :except => {:mongrel => false} )
+      if servers.any?
+        mongrel.send( t )
+      end
+    end
+  end
+end
 
 === Filtered remote cache
 
