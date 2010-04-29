@@ -4,14 +4,14 @@ Capistrano::Configuration.instance(:must_exist).load do
     Start the Unicorn Master.  This uses the :use_sudo variable to determine whether to use sudo or not. By default, :use_sudo is set to true.
     DESC
     task :start, :roles => [:app], :except => {:unicorn => false} do
-      sudo "/usr/bin/monit start all -g #{monit_group}"
+      sudo "/usr/bin/monit start unicorn_master"
     end
 
     desc <<-DESC
     Restart the Unicorn processes on the app server by starting and stopping the master. This uses the :use_sudo variable to determine whether to use sudo or not. By default, :use_sudo is set to true.
     DESC
     task :restart, :roles => [:app], :except => {:unicorn => false} do
-      sudo "/usr/bin/monit restart all -g #{monit_group}"
+      sudo "/usr/bin/monit restart unicorn_master"
     end
 
     desc <<-DESC
@@ -20,7 +20,7 @@ Capistrano::Configuration.instance(:must_exist).load do
     set to true.
     DESC
     task :stop, :roles => [:app], :except => {:unicorn => false} do
-      sudo "/usr/bin/monit stop all -g #{monit_group}"
+      sudo "/usr/bin/monit stop unicorn_master"
     end
 
     desc <<-DESC
