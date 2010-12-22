@@ -50,29 +50,6 @@ module Capistrano
       end
     end
     
-    def self.post_process      
-      unless ::Interrupt === $!
-        puts "\n\nPlease wait while the log file is processed\n"
-        # Should dump the stack trace of an exception if there is one
-        error = $!
-        unless error.nil?
-          @_deploy_log_file << error.message << "\n"
-          @_deploy_log_file << error.backtrace.join("\n")
-          @_success = false
-        end
-        self.close
-
-        hooks = [:any]
-        hooks << self.successful? ? :success : :failure
-        puts "Executing Post Processing Hooks"
-        hooks.each do |h|
-          @_post_process_hooks[h].each do |key|
-            @_configuration.parent.find_and_execute_task(key)
-          end
-        end
-        puts "Finished Post Processing Hooks"
-      end
-    end
     
     # Adds a post processing hook.  
     #

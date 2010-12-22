@@ -11,4 +11,3 @@ Capistrano::Configuration.instance(:must_exist).load do
   end
 end
 
-Capistrano::EYLogger.post_process_hook("ey_logger:upload_log_to_slice")
