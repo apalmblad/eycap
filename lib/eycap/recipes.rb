@@ -15,7 +15,6 @@ require File.dirname( __FILE__ ) + '/recipes/tomcat'
 require File.dirname( __FILE__ ) + '/recipes/juggernaut'
 require File.dirname( __FILE__ ) + '/recipes/passenger'
 require File.dirname( __FILE__ ) + '/recipes/apache'
-require File.dirname( __FILE__ ) + '/recipes/bundler'
 require File.dirname( __FILE__ ) + '/recipes/unicorn'
 
 Capistrano::Configuration.instance(:must_exist).load do
